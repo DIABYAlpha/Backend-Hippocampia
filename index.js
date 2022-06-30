@@ -75,7 +75,7 @@ app.get('/campingsByCategories', async (req, res) => {
     const findbycat = await Campings.find({
         categorie: categorierequest
     })
-    // J'envoie la reponse qui figure dans POSTMAN : http://localhost:3000/campingsByCategories?categories=Policier 
+    // J'envoie la reponse qui figure dans xtest-POSTMAN : http://localhost:3000/campingsByCategories?categories=Policier 
     res.json(findbycat)
 })
 
