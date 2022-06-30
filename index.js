@@ -9,7 +9,6 @@ const bodyParser = require('body-parser');
 
 //-----------------Mise en place de la REST API--------------------//
 const Campings = require('./campings') // importation du modéle 
-
 app.use(bodyParser.json())  // il faut déclarer avant les methodes 
 
 //----------------------------l'endroit ou je dois rajouter l'autorisation pour l'accés au front end -------------------//
@@ -36,7 +35,7 @@ app.use(function (req, res, next) {
 //------------------------Mise en place de la REST API ----------------------------------//
 
 mongoose.connect(
-    'mongodb+srv://alpha:18amadou@cluster0.99su1.mongodb.net/campings?retryWrites=true&w=majority'
+    process.env.DB_URL
     , err => {
         if (err) throw 'erreur est : ', err;
         console.log('connected to MongoDB');
