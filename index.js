@@ -33,6 +33,8 @@ app.use(function (req, res, next) {
 });
 
 //------------------------Mise en place de la REST API ----------------------------------//
+const { API_PORT } = process.env;
+const port = process.env.PORT || API_PORT;
 
 mongoose.connect(
     process.env.DB_URL
@@ -43,7 +45,7 @@ mongoose.connect(
 
 //------------------ la création du serveur web-----------------------------//
 
-app.listen(4850, () => {
+app.listen(port, () => {
     console.log('le serveur fonctionne');
 }) 
 
