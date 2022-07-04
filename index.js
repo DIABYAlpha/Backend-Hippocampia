@@ -1,11 +1,13 @@
 //------------------ la création de l'application ( API manipulant des reservations) ------------//
 
 // la declaration des variables se fait toujours au dessus ici 
-
+const cors = require('cors');
+require("dotenv").config();
 const express = require("express")
 const app = express()
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+app.use(cors())
 
 //-----------------Mise en place de la REST API--------------------//
 const Campings = require('./campings') // importation du modéle 
@@ -13,34 +15,34 @@ app.use(bodyParser.json())  // il faut déclarer avant les methodes
 
 //----------------------------l'endroit ou je dois rajouter l'autorisation pour l'accés au front end -------------------//
 // Add headers before the routes are defined
-app.use(function (req, res, next) {
+// app.use(function (req, res, next) {
 
-    // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+//     // Website you wish to allow to connect
+//     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
 
-    // Request methods you wish to allow
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+//     // Request methods you wish to allow
+//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 
-    // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+//     // Request headers you wish to allow
+//     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
 
-    // Set to true if you need the website to include cookies in the requests sent
-    // to the API (e.g. in case you use sessions)
-    res.setHeader('Access-Control-Allow-Credentials', true);
+//     // Set to true if you need the website to include cookies in the requests sent
+//     // to the API (e.g. in case you use sessions)
+//     res.setHeader('Access-Control-Allow-Credentials', true);
 
-    // Pass to next layer of middleware
-    next();
-});
+//     // Pass to next layer of middleware
+//     next();
+// });
 
 //------------------------Mise en place de la REST API ----------------------------------//
 const { API_PORT } = process.env;
-const port = process.env.PORT || API_PORT;
+const port = process.env.PORT  || API_PORT //4850;
 
 mongoose.connect(
-    process.env.DB_URL
+    process.env.DB_URL // || "mongodb+srv://alpha:18amadou@cluster0.99su1.mongodb.net/campings?retryWrites=true&w=majority"
     , err => {
         if (err) throw 'erreur est : ', err;
-        console.log('connected to MongoDB');
+        console.log('connected to MongoDB', API_PORT);
     });
 
 //------------------ la création du serveur web-----------------------------//
