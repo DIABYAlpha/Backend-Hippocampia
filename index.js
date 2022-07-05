@@ -121,7 +121,7 @@ app.delete('/campings/:id', async (req, res) => {
     const id = req.params.id
     console.log('id est : ', id);
     // const suppr = await Campings.deleteOne({ _id: id })
-    // res.json(suppr)
+    res.json('id est : ', id)
 
 })
 
