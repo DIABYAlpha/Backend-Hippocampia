@@ -10,29 +10,29 @@ const bodyParser = require('body-parser');
 app.use(cors())
 const url = 'http://localhost:4200' || 'https://thawing-atoll-53826.herokuapp.com/campings'
 //-----------------Mise en place de la REST API--------------------//
-// const Campings = require('./campings') // importation du modéle 
+const Campings = require('./campings') // importation du modéle 
 app.use(bodyParser.json())  // il faut déclarer avant les methodes 
 
 //----------------------------l'endroit ou je dois rajouter l'autorisation pour l'accés au front end -------------------//
 // Add headers before the routes are defined
-// app.use(function (req, res, next) {
+app.use(function (req, res, next) {
 
-//     // Website you wish to allow to connect
-//     res.setHeader('Access-Control-Allow-Origin', url);
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', url);
 
-//     // Request methods you wish to allow
-//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 
-//     // Request headers you wish to allow
-//     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
 
-//     // Set to true if you need the website to include cookies in the requests sent
-//     // to the API (e.g. in case you use sessions)
-//     res.setHeader('Access-Control-Allow-Credentials', true);
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true);
 
-//     // Pass to next layer of middleware
-//     next();
-// });
+    // Pass to next layer of middleware
+    next();
+});
 
 //------------------------Mise en place de la REST API ----------------------------------//
 const { API_PORT } = process.env;
