@@ -4,7 +4,6 @@ const schema = mongoose.Schema({
     titre: {
         type: String,
     },
-    auteur: String,
     type: { 
         type : String, 
     },
