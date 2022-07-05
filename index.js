@@ -7,7 +7,7 @@ const express = require("express")
 const app = express()
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-app.use(cors("*"))
+app.use(cors())
 //-----------------Mise en place de la REST API--------------------//
 const Campings = require('./campings') // importation du modéle 
 app.use(bodyParser.json())  // il faut déclarer avant les methodes 
