@@ -47,7 +47,7 @@ mongoose.connect(
 //------------------ la création du serveur web-----------------------------//
 
 app.listen(port, () => {
-    console.log('le serveur fonctionne');
+    console.log('le serveur fonctivvvonne');
 }) 
 
 //------------------------la création des routes --------------------------------------//
