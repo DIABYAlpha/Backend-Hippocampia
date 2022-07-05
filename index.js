@@ -41,6 +41,30 @@ app.listen(port, () => {
 
 // })
 
+// //-----------------------------Methode (Route) Post----------------------------------------------//
+app.post('/campings', async (req, res) => {
+    // const titre = req.body.titre; // recuperation des variables du body 
+    // const type = req.body.type;
+    // const description = req.body.description;
+    // const categories = req.body.categories;
+    // const image = req.body.image;
+    // const price = req.body.price
+
+
+    // const nouveau_camping = new Campings({ // création d'un objet representant notre model 
+    //     titre: titre,
+    //     type: type,
+    //     description: description,
+    //     categories: categories,
+    //     image: image,
+    //     price: price
+    // })
+
+    // await nouveau_camping.save() // Sauvegarde asynchrone du nouveau camping 
+    // res.json(nouveau_camping)
+    res.json("coucou")
+})
+
 app.get('/campings', async (req, res) => {
     const campings = await Campings.find() // on recupére tous les campings
     res.json(campings)
@@ -99,28 +123,7 @@ app.get('/campings', async (req, res) => {
 
 // });
 
-// //-----------------------------Methode (Route) Post----------------------------------------------//
-app.post('/campings', async (req, res) => {
-    const titre = req.body.titre; // recuperation des variables du body 
-    const type = req.body.type;
-    const description = req.body.description;
-    const categories = req.body.categories;
-    const image = req.body.image;
-    const price = req.body.price
 
-
-    const nouveau_camping = new Campings({ // création d'un objet representant notre model 
-        titre: titre,
-        type: type,
-        description: description,
-        categories: categories,
-        image: image,
-        price: price
-    })
-
-    await nouveau_camping.save() // Sauvegarde asynchrone du nouveau camping 
-    res.json(nouveau_camping)
-})
 // //----------------------------Methode Delete -------------------------------------------------//
 
 
