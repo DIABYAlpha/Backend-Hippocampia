@@ -8,7 +8,7 @@ const app = express()
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 app.use(cors())
-const url = 'http://localhost:4200' || 'https://thawing-atoll-53826.herokuapp.com/campings'
+const url = 
 //-----------------Mise en place de la REST API--------------------//
 const Campings = require('./campings') // importation du modéle 
 app.use(bodyParser.json())  // il faut déclarer avant les methodes 
@@ -18,7 +18,7 @@ app.use(bodyParser.json())  // il faut déclarer avant les methodes
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', url);
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200' || 'https://thawing-atoll-53826.herokuapp.com/campings');
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
