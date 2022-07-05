@@ -44,11 +44,11 @@ app.listen(port, () => {
 // //-----------------------------Methode (Route) Post----------------------------------------------//
 app.post('/campings', async (req, res) => {
     const titre = req.body.titre; // recuperation des variables du body 
-    // const type = req.body.type;
-    // const description = req.body.description;
-    // const categories = req.body.categories;
-    // const image = req.body.image;
-    // const price = req.body.price
+    const type = req.body.type;
+    const description = req.body.description;
+    const categories = req.body.categories;
+    const image = req.body.image;
+    const price = req.body.price
 
 
     // const nouveau_camping = new Campings({ // création d'un objet representant notre model 
@@ -62,7 +62,7 @@ app.post('/campings', async (req, res) => {
 
     // await nouveau_camping.save() // Sauvegarde asynchrone du nouveau camping 
     // res.json(nouveau_camping)
-    res.json(titre)
+    res.json(titre, type, description, price)
 })
 
 app.get('/campings', async (req, res) => {
