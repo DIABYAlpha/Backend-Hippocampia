@@ -18,7 +18,7 @@ const { API_PORT } = process.env;
 const port = process.env.PORT  || API_PORT //4850;
 
 mongoose.connect(
-    process.env.DB_URL // || "mongodb+srv://alpha:18amadou@cluster0.99su1.mongodb.net/campings?retryWrites=true&w=majority"
+    process.env.DB_URL || "mongodb+srv://alpha:18amadou@cluster0.99su1.mongodb.net/campings?retryWrites=true&w=majority"
     , err => {
         if (err) throw 'erreur est : ', err;
         console.log('connected to MongoDB', API_PORT);
@@ -61,8 +61,7 @@ app.post('/campings', async (req, res) => {
         price: req.body.price
     })
 
-    // await nouveau_camping.save() // Sauvegarde asynchrone du nouveau camping 
-    // res.json(nouveau_camping)
+    await nouveau_camping.save() // Sauvegarde asynchrone du nouveau camping
     res.json(nouveau_camping)
 })
 
