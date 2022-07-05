@@ -33,25 +33,16 @@ app.listen(port, () => {
 //------------------------la création des routes --------------------------------------//
 //-----------------------------Methode (Routes) Get----------------------------------------------//
 
-// app.delete('/campings/:id', async (req, res) => {
-//     const id = req.params.id
-//     console.log('id est : ', id);
-//     // const suppr = await Campings.deleteOne({ _id: id })
-//     res.json('id est : ', id)
+app.delete('/campings/:id', async (req, res) => {
+    const id = req.params.id
+    console.log('id est : ', id);
+    const suppr = await Campings.deleteOne({ _id: id })
+    res.json(suppr)
 
-// })
+})
 
 // //-----------------------------Methode (Route) Post----------------------------------------------//
 app.post('/campings', async (req, res) => {
-    // const titre = req.body.titre; // recuperation des variables du body 
-    // const type = req.body.type;
-    // const description = req.body.description;
-    // const categories = req.body.categories;
-    // const image = req.body.image;
-    // const price = req.body.price
-    const body = req.body
-
-
     const nouveau_camping = new Campings({ // création d'un objet representant notre model 
         titre: req.body.titre,
         type: req.body.type,
