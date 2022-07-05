@@ -52,17 +52,17 @@ app.post('/campings', async (req, res) => {
     const body = req.body
 
 
-    // const nouveau_camping = new Campings({ // création d'un objet representant notre model 
-    //     titre: titre,
-    //     type: type,
-    //     description: description,
-    //     categories: categories,
-    //     image: image,
-    //     price: price
-    // })
+    const nouveau_camping = new Campings({ // création d'un objet representant notre model 
+        titre: req.body.titre,
+        type: req.body.type,
+        description: req.body.description,
+        categories: req.body.categories,
+        image: req.body.image,
+        price: req.body.price
+    })
 
-    // await nouveau_camping.save() // Sauvegarde asynchrone du nouveau camping 
-    // res.json(nouveau_camping)
+    await nouveau_camping.save() // Sauvegarde asynchrone du nouveau camping 
+    res.json(nouveau_camping)
     res.json(body)
 })
 
