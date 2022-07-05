@@ -61,9 +61,9 @@ app.post('/campings', async (req, res) => {
         price: req.body.price
     })
 
-    await nouveau_camping.save() // Sauvegarde asynchrone du nouveau camping 
+    // await nouveau_camping.save() // Sauvegarde asynchrone du nouveau camping 
+    // res.json(nouveau_camping)
     res.json(nouveau_camping)
-    res.json(body)
 })
 
 app.get('/campings', async (req, res) => {
