@@ -31,19 +31,6 @@ app.listen(port, () => {
 }) 
 
 //------------------------la création des routes --------------------------------------//
-
-app.get('/campingsByCategories', async (req, res) => {
-
-    const categorierequest = req.query.categories  //Une constante que je récup dans ma requête(req) grâce au query 
-    //categoriesquest est une variable quelconque que je choisi 
-    // Je fais une recherche find by (par critere) dans mon objet 
-    const findbycat = await Campings.find({
-        categorie: categorierequest
-    })
-    // J'envoie la reponse qui figure dans xtest-POSTMAN : http://localhost:3000/campingsByCategories?categories=Policier 
-    res.json(findbycat)
-})
-
 //-----------------------------Methode (Routes) Get----------------------------------------------//
 app.get('/campings', async (req, res) => {
     const campings = await Campings.find() // on recupére tous les campings
@@ -73,6 +60,18 @@ app.post('/campings', async (req, res) => {
 })
 
 // //------------------------------------Methode Get par catégories ----------------------------------------//
+
+app.get('/campingsByCategories', async (req, res) => {
+
+    const categorierequest = req.query.categories  //Une constante que je récup dans ma requête(req) grâce au query 
+    //categoriesquest est une variable quelconque que je choisi 
+    // Je fais une recherche find by (par critere) dans mon objet 
+    const findbycat = await Campings.find({
+        categories: categorierequest
+    })
+    // J'envoie la reponse qui figure dans xtest-POSTMAN : http://localhost:3000/campingsByCategories?categories=Policier 
+    res.json(findbycat)
+})
 
 // //---------------------------------Methode Get par min et max -------------------//
 // // properties ? min = 0 & max=10000
