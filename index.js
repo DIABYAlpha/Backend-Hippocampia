@@ -49,8 +49,8 @@ app.post('/campings', async (req, res) => {
     const nouveau_camping = new Campings({ // création d'un objet representant notre model 
         titre: req.body.titre,
         type: req.body.type,
-        description: req.body.description,
         categories: req.body.categories,
+        description: req.body.description,
         image: req.body.image,
         price: req.body.price
     })
@@ -127,8 +127,8 @@ app.put("/campings/:id", async (req, res) => {
 
     const titre = req.body.titre; 
     const type = req.body.type;
-    const description = req.body.description;
     const categories = req.body.categories;
+    const description = req.body.description;
     const image = req.body.image;
     const price = req.body.price
 
@@ -138,11 +138,11 @@ app.put("/campings/:id", async (req, res) => {
     if (type) {
         camping.type = type
     }
-    if (description) {
-        camping.description = description
-    }
     if (categories) {
         camping.categories = categories
+    }
+    if (description) {
+        camping.description = description
     }
     if (image) {
         camping.image = image
