@@ -7,7 +7,6 @@ const express = require("express")
 const app = express()
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-
 app.use(cors())
 //-----------------Mise en place de la REST API--------------------//
 const Campings = require('./campings') // importation du modéle 
@@ -34,10 +33,10 @@ app.listen(port, () => {
 
 //------------------------la création des routes --------------------------------------//
 //-----------------------------Methode (Routes) Get----------------------------------------------//
-app.get('/campings', async (req, res) => {
-    const campings = await Campings.find().exec(); // on recupére tous les campings
-    res.json(campings);
-});
+// app.get('/campings', async (req, res) => {
+//     const campings = await Campings.find().exec(); // on recupére tous les campings
+//     res.json(campings);
+// });
 //                         Get by id                              ----------------------------------------//
 app.get('/campings/:id', async (req, res) => {
     const id = req.params.id
