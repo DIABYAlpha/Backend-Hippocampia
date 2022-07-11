@@ -35,22 +35,7 @@ app.listen(port, () => {
 //-----------------------------Methode (Routes) Get----------------------------------------------//
 app.get('/campings', async (req, res) => {
     const campings = await Campings.find().exec(); // on recupére tous les campings
-    res.json(campings);
-});
-//                         Get by id                              ----------------------------------------//
-app.get('/campings/:id', async (req, res) => {
-    const id = req.params.id
-    const camping = await Campings.findOne({ _id: id })    // oN recupére le camping grâce à l'id 
-    res.json(camping)
-})
-
-
-//----------------------------------la pagination ------------------------------------------------------//
-
-app.get('/campings', async (req, res) => {
-    // destructure page and limit and set default values
     const { page = 1, limit = 3 } = req.query;
-
     try {
         // execute query with page and limit values
         const campings = await Campings.find()
@@ -70,7 +55,22 @@ app.get('/campings', async (req, res) => {
     } catch (err) {
         console.error(err.message);
     }
+    res.json(campings);
 });
+//                         Get by id                              ----------------------------------------//
+app.get('/campings/:id', async (req, res) => {
+    const id = req.params.id
+    const camping = await Campings.findOne({ _id: id })    // oN recupére le camping grâce à l'id 
+    res.json(camping)
+})
+
+
+//----------------------------------la pagination ------------------------------------------------------//
+
+// app.get('/campings', async (req, res) => {
+//     // destructure page and limit and set default values
+    
+// });
 
 
 
