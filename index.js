@@ -7,6 +7,7 @@ const express = require("express")
 const app = express()
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+
 app.use(cors())
 //-----------------Mise en place de la REST API--------------------//
 const Campings = require('./campings') // importation du modéle 
@@ -15,33 +16,63 @@ app.use(bodyParser.json())  // il faut déclarer avant les methodes
 
 //------------------------Mise en place de la REST API ----------------------------------//
 const { API_PORT } = process.env;
-const port = process.env.PORT  || API_PORT //4850;
+const port = process.env.PORT || API_PORT //4850;
 
 mongoose.connect(
     process.env.DB_URL || "mongodb+srv://alpha:18amadou@cluster0.99su1.mongodb.net/campings?retryWrites=true&w=majority"
     , err => {
         if (err) throw 'erreur est : ', err;
         console.log('connected to MongoDB', API_PORT);
+
     });
 
 //------------------ la création du serveur web-----------------------------//
 
 app.listen(port, () => {
     console.log('le serveur fonctionne');
-}) 
+})
 
 //------------------------la création des routes --------------------------------------//
 //-----------------------------Methode (Routes) Get----------------------------------------------//
 app.get('/campings', async (req, res) => {
-    const campings = await Campings.find() // on recupére tous les campings
-    res.json(campings)
+    const campings = await Campings.find().exec(); // on recupére tous les campings
+    res.json(campings);
 });
 //                         Get by id                              ----------------------------------------//
 app.get('/campings/:id', async (req, res) => {
-    const id = req.params.id                          
+    const id = req.params.id
     const camping = await Campings.findOne({ _id: id })    // oN recupére le camping grâce à l'id 
     res.json(camping)
 })
+
+
+//----------------------------------la pagination ------------------------------------------------------//
+
+app.get('/campings', async (req, res) => {
+    // destructure page and limit and set default values
+    const { page = 1, limit = 3 } = req.query;
+
+    try {
+        // execute query with page and limit values
+        const campings = await Campings.find()
+            .limit(limit * 1)
+            .skip((page - 1) * limit)
+            .exec();
+
+        // get total documents in the Posts collection 
+        const count = await Campings.countDocuments();
+
+        // return response with campings, total pages, and current page
+        res.json({
+            campings,
+            totalPages: Math.ceil(count / limit),
+            currentPage: page
+        });
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
 
 
 // //-----------------------------Methode (Route) Post----------------------------------------------//
@@ -95,11 +126,11 @@ app.get('/campingsByKeyword', async (req, res) => {  // je app.get ('/je choisis
     const FindKeyWord = req.query.motCles
 
     const keyWord = await Campings.find({
-    $or: [                                       // or permet de pouvoir utiliser plusieurs prop du model ( titre, auteur, genre)
-        { 'titre': new RegExp(FindKeyWord, 'i')},         //  Un objet RegExp est utilisé pour étudier les correspondances
-            { 'type': new RegExp(FindKeyWord, 'i')},    //  d'un texte avec un motif donné. Il évite de taper le mot en 
-            { 'categories': new RegExp(FindKeyWord, 'i')},     // entier et peux trouver à partir des suggestions.
-    ]
+        $or: [                                       // or permet de pouvoir utiliser plusieurs prop du model ( titre, auteur, genre)
+            { 'titre': new RegExp(FindKeyWord, 'i') },         //  Un objet RegExp est utilisé pour étudier les correspondances
+            { 'type': new RegExp(FindKeyWord, 'i') },    //  d'un texte avec un motif donné. Il évite de taper le mot en 
+            { 'categories': new RegExp(FindKeyWord, 'i') },     // entier et peux trouver à partir des suggestions.
+        ]
     })
 
     res.json(keyWord)
@@ -125,7 +156,7 @@ app.put("/campings/:id", async (req, res) => {
 
     // On recupére les valeurs potentiellement modifiées 
 
-    const titre = req.body.titre; 
+    const titre = req.body.titre;
     const type = req.body.type;
     const categories = req.body.categories;
     const description = req.body.description;
